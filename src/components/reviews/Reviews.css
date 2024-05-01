@@ -1,0 +1,15 @@
+.movie-poster {
+    height: 440px; /* Set a fixed height */
+    width: 300px; /* Set a fixed width */
+    border: 1px solid #ccc; /* Optional: adds a border around the poster */
+    overflow: hidden; /* Ensures no part of the image spills out */
+    display: flex; /* Centers the image horizontally and vertically */
+    align-items: center;
+    justify-content: center;
+}
+
+.movie-poster img {
+    height: 100%;  /* Makes the image fill the container */
+    width: auto;   /* Maintains the aspect ratio of the image */
+    min-width: 100%; /* Ensures the image covers the width */
+}

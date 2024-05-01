@@ -1,0 +1,20 @@
+.star-rating {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    color: #444; /* Default star color */
+  }
+  
+  .star {
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .star.filled {
+    color: #ffc107; /* Color when star is active */
+  }
+  
+  .star:hover {
+    color: #ffdd57; /* Color when star is hovered */
+  }
+  

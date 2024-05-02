@@ -1,6 +1,19 @@
-
 import axios from 'axios';
+import { getAuthToken } from '../utils/auth';
 
-export default axios.create({
-    baseURL: 'http://localhost:8080',  // Предполагаем, что ваш бэкенд на порту 8080
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8080', // Ensure this matches your backend server
 });
+
+axiosInstance.interceptors.request.use(config => {
+    const token = getAuthToken();
+    if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+}, error => {
+    return Promise.reject(error);
+});
+
+export default axiosInstance;
+

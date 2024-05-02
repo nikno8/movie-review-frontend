@@ -6,25 +6,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { Link, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';  
+import api from '../../api/axiosConfig';  // Make sure this is the correct path to your axiosConfig
 
 const Hero = ({ movies }) => {
     const navigate = useNavigate();
     const [moviesWithRatings, setMoviesWithRatings] = useState([]);
 
     useEffect(() => {
-        // Fetch ratings for each movie and add to movie data
         const fetchRatingsAndSetMovies = async () => {
-            const updatedMovies = await Promise.all(movies.map(async (movie) => {
-                const response = await axios.get(`http://localhost:8080/api/v1/reviews/average/${movie.imdbId}`);
-                return {...movie, averageRating: response.data};  // Append average rating to each movie
-            }));
-            setMoviesWithRatings(updatedMovies);
+            try {
+                const updatedMovies = await Promise.all(movies.map(async (movie) => {
+                    const response = await api.get(`/api/v1/reviews/average/${movie.imdbId}`); // Use the api instance
+                    return { ...movie, averageRating: response.data };
+                }));
+                setMoviesWithRatings(updatedMovies);
+            } catch (error) {
+                console.error("Failed to fetch movie ratings:", error);
+            }
         };
-
-        fetchRatingsAndSetMovies();
+    
+        if (movies && movies.length) {
+            fetchRatingsAndSetMovies();
+        }
     }, [movies]);
-
+    
     function reviews(movieId) {
         navigate(`/Reviews/${movieId}`);
     }
@@ -42,7 +47,6 @@ const Hero = ({ movies }) => {
                                     </div>
                                     <div className="movie-title">
                                         <h4>{movie.title}</h4>
-                                        {/* Display average rating */}
                                         <div className="average-rating">
                                             <strong>Average Rating: {movie.averageRating?.toFixed(1)}</strong>
                                         </div>
@@ -53,9 +57,7 @@ const Hero = ({ movies }) => {
                                                 <FontAwesomeIcon className="play-button-icon" icon={faCirclePlay} />
                                             </div>
                                         </Link>
-                                        <div className="movie-review-button-container">
-                                            <Button variant="info" onClick={() => reviews(movie.imdbId)}>Reviews</Button>
-                                        </div>
+                                        <Button variant="info" onClick={() => reviews(movie.imdbId)}>Reviews</Button>
                                     </div>
                                 </div>
                             </div>

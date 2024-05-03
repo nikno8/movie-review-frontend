@@ -10,10 +10,10 @@ const ReviewForm = ({ handleSubmit, revText, labelText, rating, setRating }) => 
               <textarea ref={revText} className="form-control" rows="3" required></textarea>
           </div>
           <div className="mb-3">
-              <label className="form-label">Rate the movie</label>
+              <label className="form-label">Оценить фильм</label>
               <StarRating onRatingSelected={setRating} />
           </div>
-          <button type="submit" className="btn btn-outline-info">Submit</button>
+          <button type="submit" className="btn btn-outline-info">Подтвердить</button>
       </form>
   );
 }

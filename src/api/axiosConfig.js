@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getAuthToken } from '../utils/auth';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8080', // Ensure this matches your backend server
+    baseURL: 'http://localhost:8080', 
 });
 
 axiosInstance.interceptors.request.use(config => {

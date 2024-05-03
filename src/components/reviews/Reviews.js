@@ -1,22 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import { useParams, useNavigate } from 'react-router-dom'; // useNavigate to handle redirection after deletion
+import { Container, Row, Col, Button } from 'react-bootstrap'; // Import Button from react-bootstrap
 import ReviewForm from '../reviewForm/ReviewForm';
 import api from '../../api/axiosConfig';
 import './Reviews.css';
+import { jwtDecode } from 'jwt-decode';  // Исправленный импорт jwtDecode
 
-const Reviews = ({ getMovieData, movie }) => {
+
+const Reviews = ({ getMovieData, movie}) => {
     const revText = useRef();
     const [reviews, setReviews] = useState([]);
-    const [rating, setRating] = useState(0); // Initialize rating state to 0
-    let params = useParams();
-    const movieId = params.movieId; // this is the imdbId passed from the route
+    const [rating, setRating] = useState(0);
+    const [userRole, setUserRole] = useState(null);
+    const params = useParams();
+    const navigate = useNavigate(); // to navigate after actions
+    const movieId = params.movieId;
 
     useEffect(() => {
-        getMovieData(movieId); // This function should now expect imdbId to fetch movie data
-        fetchReviews(movieId);  // Fetch reviews when the component mounts
+        getMovieData(movieId);
+        fetchReviews(movieId);
+        determineUserRole();
     }, [movieId, getMovieData]);
 
+    const determineUserRole = () => {
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+            const decoded = jwtDecode(token);
+            setUserRole(decoded.role); // Устанавливаем роль пользователя
+            console.log("UserRole:", userRole);
+
+        }
+    };
     const fetchReviews = async (imdbId) => {
         try {
             const response = await api.get(`/api/v1/reviews/movie/${imdbId}`); // Correct API endpoint to fetch reviews by imdbId
@@ -45,10 +59,21 @@ const Reviews = ({ getMovieData, movie }) => {
         }
     };
 
+    const deleteReview = async (reviewId) => {
+        try {
+            console.log('Attempting to delete review with ID:)', reviewId);
+            await api.delete(`/api/v1/reviews/${reviewId}`);
+            setReviews(prev => prev.filter(r => r.id !== reviewId));
+        } catch (error) {
+            console.error('Failed to delete review:', error);
+        }
+    };
+
+   
     return (
         <Container>
             <Row>
-                <Col><h3>Reviews</h3></Col>
+                <Col><h3>Отзывы</h3></Col>
             </Row>
             <Row className="mt-2">
                 <Col>
@@ -57,21 +82,28 @@ const Reviews = ({ getMovieData, movie }) => {
                     </div>
                 </Col>
                 <Col>
-                    <ReviewForm
-                        handleSubmit={addReview}
-                        revText={revText}
-                        labelText="Write a Review?"
-                        rating={rating}
-                        setRating={setRating}
-                    />
+                    {userRole === 'USER' && (
+                        <ReviewForm
+                            handleSubmit={addReview}
+                            revText={revText}
+                            labelText="Оставьте отзыв"
+                            rating={rating}
+                            setRating={setRating}
+                        />
+                    )}
                     <hr />
                     {reviews.map((r, index) => (
                         <React.Fragment key={index}>
-                            <Row>
-                                <Col>{r.body}</Col>
+                            <Row className="review-row">
+                                <Col className="review-content">{r.body}</Col>
                             </Row>
                             <Row>
-                                <Col>{`Rating: ${r.rating}`}</Col>
+                                <Col>{`Оценка: ${r.rating}`}</Col>
+                                {userRole === 'ADMIN' && (
+                                    <Button className="delete-button" onClick={() => deleteReview(r.id)}>
+                                        Удалить отзыв
+                                    </Button>
+                                )}
                             </Row>
                             <Row>
                                 <Col><hr /></Col>
@@ -82,8 +114,8 @@ const Reviews = ({ getMovieData, movie }) => {
             </Row>
         </Container>
     );
-    
 };
 
 export default Reviews;
+
 

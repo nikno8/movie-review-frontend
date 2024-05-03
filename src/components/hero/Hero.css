@@ -1,3 +1,25 @@
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Скрывает горизонтальный скролл */
+    overflow-y: auto; /* Позволяет скроллинг по необходимости */
+}
+
+/* Стили для карусели, убедитесь что скроллы отсутствуют */
+.movie-carousel-container {
+    width: 100%; /* Ширина контейнера карусели */
+    overflow: hidden; /* Скрываем любые скроллы */
+}
+
+/* Улучшение для контейнеров карточек, чтобы не вызывали скролл */
+.movie-card-container {
+    height: 300px; /* Задаем фиксированную высоту */
+    width: 100%; /* Ширина на 100% экрана */
+    overflow: hidden; /* Скрываем скроллы */
+}
+
+
 .movie-carousel-container {
     width: 100vw;
     background-color: black;
@@ -14,20 +36,35 @@
 .movie-poster > img {
     height: 100%;
     width: 100%;
+    object-fit: cover;
 }
 
 .movie-card-container {
-    height: 550px;
+    /* height: 550px;
     background-color: black;
-    position: relative; /* Ensures that position of child elements can be absolutely defined */
+    position: relative; Ensures that position of child elements can be absolutely defined */
+    height: 550px; /* Высота контейнера карусели */
+    width: 100%; /* Ширина контейнера карусели */
+    overflow: hidden; /* Скрытие части изображения, выходящей за пределы */
+    position: relative; /* Необходимо для позиционирования внутренних элементов */
+    background-color: black;
 }
 
 .movie-card {
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat;
     width: 100%;
     height: 100%;
     background-size: cover;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)), var(--img); */
+    height: 100%;
+    width: 100%;
+    background-size: cover; /* Обеспечивает покрытие всего доступного пространства */
+    background-position:top; 
+    display: flex;
+    align-items: center; /* Центрирование содержимого карточки по вертикали */
+    justify-content: center; /* Центрирование содержимого карточки по горизонтали */
     background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)), var(--img);
+    background-repeat: no-repeat;
 }
 
 .movie-detail {
@@ -36,6 +73,9 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+}
+*{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .movie-title {
@@ -46,11 +86,28 @@
     font-size: 1.5rem; /* Adjust font size to fit the design */
 }
 
+.movie-header{
+    font-size:70px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .average-rating {
     color: gold; /* Makes the rating stand out */
     font-size: 1.2rem; /* Slightly smaller than the title for hierarchy */
     margin-top: 10px; /* Adds space between the title and the rating */
 }
+
+.movie-release-date {
+    color: white;
+    font-size: 0.9em;
+}
+
+.movie-genres {
+    color:white;
+    font-size: 0.9em;
+    margin-bottom: 5px; /* Отступ снизу */
+}
+
 
 .movie-buttons-container {
     display: flex;
@@ -76,6 +133,30 @@
     font-size: 4rem;
     color: white;
 }
+
+.movie-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie-metadata {
+    margin-left: 20px; /* Отступ слева от постера */
+}
+
+.movie-genres span {
+    display: block; /* Жанры будут отображаться в столбик */
+}
+
+.movie-detail {
+    display: flex;
+    align-items:center; /* Выравнивание элементов по вертикали */
+}
+
+.movie-buttons-container {
+    margin-top: 20px; /* Отступ сверху для кнопок */
+}
+
 
 @media only screen and (max-width: 800px) {
     .movie-detail {

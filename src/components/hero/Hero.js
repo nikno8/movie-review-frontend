@@ -46,9 +46,15 @@ const Hero = ({ movies }) => {
                                         <img src={movie.poster} alt={movie.title} />
                                     </div>
                                     <div className="movie-title">
-                                        <h4>{movie.title}</h4>
+                                        <h4 className = "movie-header">{movie.title}</h4>
+                                        <p className="movie-release-date">Дата выхода: {movie.releaseDate}</p>
+                                        <div className="movie-genres">
+                                                {movie.genres.map((genre, index) => (
+                                                    <span key={index}>{genre}<br /></span>
+                                                ))}
+                                            </div>
                                         <div className="average-rating">
-                                            <strong>Average Rating: {movie.averageRating?.toFixed(1)}</strong>
+                                            <strong>Средний рейтинг: {movie.averageRating?.toFixed(1)}</strong>
                                         </div>
                                     </div>
                                     <div className="movie-buttons-container">

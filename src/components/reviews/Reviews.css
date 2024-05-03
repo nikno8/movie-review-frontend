@@ -1,7 +1,28 @@
+.review-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px; /* Adds some space below each review */
+}
+
+.review-content {
+    flex-grow: 1; /* Allows the review text to take up available space */
+    margin-right: 10px; /* Adds space between the review text and the button */
+}
+
+.delete-button {
+    padding: 5px 10px; /* Pads the button for better touch */
+    background-color: green; /* Red background for visibility */
+    color: white; /* White text for contrast */
+    border: none; /* No border for a cleaner look */
+    cursor: pointer; /* Cursor indicates it's clickable */
+    font-size: 0.9rem; /* Adjust font size for better fit */
+}
+
 .movie-poster {
     height: 440px; /* Set a fixed height */
     width: 300px; /* Set a fixed width */
-    border: 1px solid #ccc; /* Optional: adds a border around the poster */
+    border: 1px solid #ccc; /* Adds a border around the poster */
     overflow: hidden; /* Ensures no part of the image spills out */
     display: flex; /* Centers the image horizontally and vertically */
     align-items: center;

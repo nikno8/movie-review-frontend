@@ -20,7 +20,7 @@ const Header = () => {
     };
 
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+        <Navbar bg="dark" variant="dark" expand="lg">
             <Container fluid>
                 <Navbar.Brand href="/" style={{"color":'gold'}}>
                     <FontAwesomeIcon icon={faVideoSlash} />Gold
@@ -33,7 +33,7 @@ const Header = () => {
                             navbarScroll
                         >
                         <NavLink className="nav-link" to="/">Главная</NavLink>
-                        {/* <NavLink className="nav-link" to="/watchList">Watch List</NavLink>       */}
+                        <NavLink className="nav-link" to="/watchlist">Список просмотра</NavLink>
                     </Nav>
                     <Button variant="outline-info" className="me-2" onClick={handleLogin}>Вход</Button>
                     <Button variant="outline-info" onClick={handleRegister}>Регистрация</Button>

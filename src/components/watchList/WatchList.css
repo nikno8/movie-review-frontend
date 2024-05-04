@@ -1,0 +1,26 @@
+.watchlist-container {
+    padding: 20px;
+    color: white;
+    background-color: #121212;
+}
+
+.movies-list-watchlist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie-item-watchlist {
+    width: 200px;
+}
+
+.movie-poster-watchlist {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.movie-info-watchlist h3 {
+    margin-top: 5px;
+    font-size: 16px;
+}

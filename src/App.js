@@ -13,6 +13,7 @@ import NotFound from './components/notFound/NotFound';
 import Login from './components/login/Login';
 import Registration from './components/registration/Registration';
 import api from './api/axiosConfig';
+import WatchList from './components/watchList/WatchList';
 
 function App() {
     const [movies, setMovies] = useState([]);
@@ -51,6 +52,7 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route path="/login" element={<Login />} />
                         <Route index element={<Home movies={movies} />} />
+                        <Route path="/watchList" element={<WatchList />} />
                         <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
                         <Route path="/Reviews/:movieId" element={<Reviews getMovieData={getMovieData} movie={movie} reviews={reviews} setReviews={setReviews} />} />
                         <Route path="*" element={<NotFound />} />

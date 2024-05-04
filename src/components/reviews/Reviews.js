@@ -12,6 +12,7 @@ const Reviews = ({ getMovieData, movie}) => {
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState(0);
     const [userRole, setUserRole] = useState(null);
+    const [userId, setUserId] = useState(null); // Добавить состояние для userId
     const params = useParams();
     const navigate = useNavigate(); // to navigate after actions
     const movieId = params.movieId;
@@ -27,10 +28,27 @@ const Reviews = ({ getMovieData, movie}) => {
         if (token) {
             const decoded = jwtDecode(token);
             setUserRole(decoded.role); // Устанавливаем роль пользователя
+            setUserId(decoded.userId); // Извлечь userId из токена
             console.log("UserRole:", userRole);
 
         }
     };
+    const addToWatchList = async () => {
+        if (!userId) {
+            alert('Необходима авторизация.');
+            navigate('/login');
+            return;
+        }
+
+        try {
+            await api.post(`/api/v1/users/${userId}/watchlist/${movieId}`);
+            alert('Фильм добавлен в ваш список для просмотра');
+        } catch (error) {
+            console.error('Failed to add movie to watchlist:', error);
+            alert('Не удалось добавить фильм в список');
+        }
+    };
+
     const fetchReviews = async (imdbId) => {
         try {
             const response = await api.get(`/api/v1/reviews/movie/${imdbId}`); // Correct API endpoint to fetch reviews by imdbId
@@ -83,13 +101,18 @@ const Reviews = ({ getMovieData, movie}) => {
                 </Col>
                 <Col>
                     {userRole === 'USER' && (
-                        <ReviewForm
-                            handleSubmit={addReview}
-                            revText={revText}
-                            labelText="Оставьте отзыв"
-                            rating={rating}
-                            setRating={setRating}
-                        />
+                        <>
+                            <ReviewForm
+                                handleSubmit={addReview}
+                                revText={revText}
+                                labelText="Оставьте отзыв"
+                                rating={rating}
+                                setRating={setRating}
+                            />
+                            <Button variant="primary" onClick={addToWatchList}>
+                                Добавить в список для просмотра
+                            </Button>
+                        </>
                     )}
                     <hr />
                     {reviews.map((r, index) => (

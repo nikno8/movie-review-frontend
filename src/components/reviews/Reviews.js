@@ -110,9 +110,7 @@ const Reviews = ({ getMovieData, movie}) => {
                                 setRating={setRating}
                             />
                             
-                            {/* <Button variant="primary" onClick={addToWatchList}>
-                                Добавить в список для просмотра
-                            </Button> */}
+                           
                         </>
                     )}
                     <hr />

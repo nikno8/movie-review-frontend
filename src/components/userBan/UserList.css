@@ -1,0 +1,53 @@
+/* UserList.css */
+.user-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.user-list-title {
+    text-align: center;
+    color: #343a40;
+}
+
+.user-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.user-info {
+    font-size: 16px;
+    color: #666;
+}
+
+.button-ban {
+    min-width: 100px;
+    border: none;
+    color: white;
+    background-color: #dc3545;
+    transition: background-color 0.3s ease;
+}
+
+.button-ban:hover {
+    background-color: #c82333;
+}
+
+/* Дополнительные стили для адаптации и улучшения читаемости */
+@media (max-width: 768px) {
+    .user-list-container {
+        padding: 10px;
+    }
+
+    .user-info {
+        font-size: 14px;
+    }
+}

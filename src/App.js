@@ -7,6 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout';
 import Home from './components/home/Home';
 import Header from './components/header/Header';
+import UserList from './components/userBan/UserList';
 import Trailer from './components/trailer/Trailer';
 import Reviews from './components/reviews/Reviews';
 import NotFound from './components/notFound/NotFound';
@@ -52,6 +53,7 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route path="/login" element={<Login />} />
                         <Route index element={<Home movies={movies} />} />
+                        <Route path="/admin/users" element={<UserList />} />
                         <Route path="/watchList" element={<WatchList />} />
                         <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
                         <Route path="/Reviews/:movieId" element={<Reviews getMovieData={getMovieData} movie={movie} reviews={reviews} setReviews={setReviews} />} />

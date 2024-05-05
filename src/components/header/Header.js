@@ -6,15 +6,20 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react'; // Импорт useState и useEffect для работы с состоянием и жизненным циклом компонента
+import { jwtDecode } from 'jwt-decode'; // Убедитесь, что jwt-decode правильно импортирован
 
 const Header = () => {
     const navigate = useNavigate();
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Состояние, отражающее статус входа пользователя
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userRole, setUserRole] = useState('');
 
     useEffect(() => {
-        // Проверяем наличие токена при монтировании компонента
         const token = localStorage.getItem('auth_token');
-        setIsLoggedIn(!!token);
+        if (token) {
+            const decoded = jwtDecode(token);
+            setIsLoggedIn(true);
+            setUserRole(decoded.role);
+        }
     }, []);
 
     const handleLogin = () => {
@@ -29,7 +34,10 @@ const Header = () => {
         localStorage.removeItem('auth_token');
         navigate('/');
         window.location.reload();
-        
+    };
+
+    const handleAdminPanel = () => {
+        navigate('/admin'); // Перенаправление на панель администрирования
     };
 
     return (
@@ -46,7 +54,11 @@ const Header = () => {
                         navbarScroll
                     >
                         <NavLink className="nav-link" to="/">Главная</NavLink>
-                        <NavLink className="nav-link" to="/watchlist">Список просмотра</NavLink>
+                        {userRole === 'ADMIN' ? (
+                            <NavLink className="nav-link" to="/admin/users">Панель администрирования</NavLink>
+                        ) : (
+                            <NavLink className="nav-link" to="/watchlist">Список просмотра</NavLink>
+                        )}
                     </Nav>
                     {isLoggedIn ? (
                         <Button variant="outline-danger" onClick={handleLogout}>Выйти</Button>

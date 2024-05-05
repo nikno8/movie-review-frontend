@@ -35,19 +35,19 @@ const Registration = () => {
                 <h2>Account Registration</h2>
                 <div>
                     <label htmlFor="firstName">First Name</label>
-                    <input type="text" name="firstName" placeholder="Enter your first name" onChange={handleChange} />
+                    <input type="text" name="firstName" placeholder="Enter your first name" onChange={handleChange} required />
                 </div>
                 <div>
                     <label htmlFor="lastName">Last Name</label>
-                    <input type="text" name="lastName" placeholder="Enter your last name" onChange={handleChange} />
+                    <input type="text" name="lastName" placeholder="Enter your last name" onChange={handleChange} required />
                 </div>
                 <div>
                     <label htmlFor="login">Username</label>
-                    <input type="text" name="login" placeholder="Choose a username" onChange={handleChange} />
+                    <input type="text" name="login" placeholder="Choose a username" onChange={handleChange} required />
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" placeholder="Choose a password" onChange={handleChange} />
+                    <input type="password" name="password" placeholder="Choose a password" onChange={handleChange} required />
                 </div>
                 <button type="submit">Register</button>
             </form>

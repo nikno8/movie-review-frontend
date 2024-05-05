@@ -63,7 +63,7 @@ const Hero = ({ movies }) => {
                                                 <FontAwesomeIcon className="play-button-icon" icon={faCirclePlay} />
                                             </div>
                                         </Link>
-                                        <Button variant="info" onClick={() => reviews(movie.imdbId)}>Reviews</Button>
+                                        <Button variant="info" onClick={() => reviews(movie.imdbId)}>Отзывы</Button>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {jwtDecode} from 'jwt-decode';  // Убедитесь, что импорт правильный, должно быть 'import jwtDecode from "jwt-decode";'
+import { useNavigate } from 'react-router-dom';
 import api from '../../api/axiosConfig';
 import './WatchList.css';
 import Button from 'react-bootstrap/Button';
@@ -8,6 +9,7 @@ const WatchList = () => {
     const [watchList, setWatchList] = useState([]);
     const [userRole, setUserRole] = useState(null);
     const [userId, setUserId] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('auth_token');
@@ -41,6 +43,10 @@ const WatchList = () => {
         }
     };
 
+    const handleImageClick = (movieId) => {
+        navigate(`/Reviews/${movieId}`);
+    };
+
     return (
         <div className="watchlist-container">
             {userRole === 'USER' ? (
@@ -49,7 +55,7 @@ const WatchList = () => {
                     <div className="movies-list-watchlist">
                         {watchList.map((movie) => (
                             <div key={movie.imdbId} className="movie-item-watchlist">
-                                <img src={movie.poster} alt={movie.title} className="movie-poster-watchlist" />
+                                <img src={movie.poster} alt={movie.title} className="movie-poster-watchlist" onClick={() => handleImageClick(movie.imdbId)} />
                                 <div className="movie-info-watchlist">
                                     <h3>{movie.title}</h3>
                                     <p>{movie.releaseDate}</p>

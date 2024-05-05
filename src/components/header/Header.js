@@ -27,7 +27,9 @@ const Header = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('auth_token');
+        navigate('/');
         window.location.reload();
+        
     };
 
     return (

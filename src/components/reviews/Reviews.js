@@ -45,7 +45,7 @@ const Reviews = ({ getMovieData, movie}) => {
             alert('Фильм добавлен в ваш список для просмотра');
         } catch (error) {
             console.error('Failed to add movie to watchlist:', error);
-            alert('Не удалось добавить фильм в список');
+            alert('Не удалось добавить фильм в список, возможно он уже был добавлен');
         }
     };
 
@@ -109,9 +109,10 @@ const Reviews = ({ getMovieData, movie}) => {
                                 rating={rating}
                                 setRating={setRating}
                             />
-                            <Button variant="primary" onClick={addToWatchList}>
+                            
+                            {/* <Button variant="primary" onClick={addToWatchList}>
                                 Добавить в список для просмотра
-                            </Button>
+                            </Button> */}
                         </>
                     )}
                     <hr />
@@ -133,7 +134,15 @@ const Reviews = ({ getMovieData, movie}) => {
                             </Row>
                         </React.Fragment>
                     ))}
+                     {userRole === 'USER' && (
+                        <>
+                            <Button variant="primary" onClick={addToWatchList}>
+                                Добавить в список для просмотра
+                            </Button>
+                        </>
+                    )}
                 </Col>
+                
             </Row>
         </Container>
     );

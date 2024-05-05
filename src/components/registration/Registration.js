@@ -20,7 +20,7 @@ const Registration = () => {
         e.preventDefault();
         try {
             const response = await axios.post('/api/v1/auth/register', formData);
-            localStorage.setItem('token', response.data.token);  // Save token to localStorage
+            localStorage.setItem('auth_token', response.data.token);  // Save token to localStorage
             console.log('Token set in storage:', localStorage.getItem('token'));
             navigate('/');  // Redirect to home page after registration
             window.location.reload(); // Reload the page

@@ -51,7 +51,7 @@ const Reviews = ({ getMovieData, movie}) => {
 
     const fetchReviews = async (imdbId) => {
         try {
-            const response = await api.get(`/api/v1/reviews/movie/${imdbId}`); d
+            const response = await api.get(`/api/v1/reviews/movie/${imdbId}`); 
             setReviews(response.data); 
         } catch (error) {
             console.error('Failed to fetch reviews:', error);

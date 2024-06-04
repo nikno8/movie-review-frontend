@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
-import StarRating from '../starRating/StarRating';  // Ensure the path is correct
+import StarRating from '../starRating/StarRating';  
 
 const ReviewForm = ({ handleSubmit, revText, labelText, rating, setRating }) => {
   return (

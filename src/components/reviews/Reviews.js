@@ -51,8 +51,8 @@ const Reviews = ({ getMovieData, movie}) => {
 
     const fetchReviews = async (imdbId) => {
         try {
-            const response = await api.get(`/api/v1/reviews/movie/${imdbId}`); // Correct API endpoint to fetch reviews by imdbId
-            setReviews(response.data); // Assuming the response directly contains the array of reviews
+            const response = await api.get(`/api/v1/reviews/movie/${imdbId}`); d
+            setReviews(response.data); 
         } catch (error) {
             console.error('Failed to fetch reviews:', error);
         }
@@ -66,12 +66,12 @@ const Reviews = ({ getMovieData, movie}) => {
             const response = await api.post("/api/v1/reviews", {
                 reviewBody: reviewBody,
                 rating: rating,
-                imdbId: movieId // Passing imdbId to backend for review association
+                imdbId: movieId 
             });
 
             setReviews(prev => [...prev, { body: reviewBody, rating }]);
-            revText.current.value = ""; // Clear text area after submitting
-            setRating(0); // Reset rating after submitting
+            revText.current.value = ""; 
+            setRating(0); 
         } catch (err) {
             console.error(err);
         }

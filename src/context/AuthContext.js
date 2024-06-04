@@ -1,6 +1,6 @@
-// src/context/AuthContext.js
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { jwtDecode } from 'jwt-decode';  // Corrected import statement
+import { jwtDecode } from 'jwt-decode';  
 import { getAuthToken } from '../utils/auth';
 
 const AuthContext = createContext(null);
@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = getAuthToken();
         if (token) {
-            const decoded = jwtDecode(token); // Use the correctly imported jwtDecode
+            const decoded = jwtDecode(token); 
             setAuth({ isAuthenticated: true, user: decoded });
         }
     }, []);

@@ -46,7 +46,7 @@ function App() {
     }, []);
 
     return (
-        <AuthProvider>
+        // <AuthProvider>
             <div className="App">
                 <Header />
                 <Routes>
@@ -62,7 +62,7 @@ function App() {
                     </Route>
                 </Routes>
             </div>
-        </AuthProvider>
+        // </AuthProvider>
     );
 }
 
